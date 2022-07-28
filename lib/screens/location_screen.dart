@@ -109,6 +109,12 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ],
               ),
+              Center(
+                child: Text(
+                  '$cityName',
+                  style: kDetailsText,
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.all(8),
                 child: Container(
@@ -147,7 +153,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       Expanded(
                         child: Column(
                           children: [
-                            Text('Feels Like', style: kDetailsStyle),
+                            Text('Feels like', style: kDetailsStyle),
                             Text(
                               '$feels_like °C',
                               style: kDetailsText,
