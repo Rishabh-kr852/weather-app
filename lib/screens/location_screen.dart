@@ -20,6 +20,9 @@ class _LocationScreenState extends State<LocationScreen> {
   String message;
   int feels_like;
   int humidity;
+  String icon;
+  double wind_speed;
+  int max_temp;
 
   @override
   void initState() {
@@ -45,6 +48,10 @@ class _LocationScreenState extends State<LocationScreen> {
       double like = weatherData['main']['feels_like'];
       feels_like = like.toInt();
       humidity = weatherData['main']['humidity'];
+      icon = weatherData['weather'][0]['icon'];
+      wind_speed = weatherData['wind']['speed'];
+      double m_temp = weatherData['main']['temp_max'];
+      max_temp = m_temp.toInt();
     });
   }
 
@@ -54,7 +61,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/background.jpg'),
+            image: AssetImage('images/bg.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.6), BlendMode.dstATop),
@@ -115,19 +122,18 @@ class _LocationScreenState extends State<LocationScreen> {
                         padding: const EdgeInsets.all(10.0),
                         child: Expanded(
                           child: Text(
-                            '$temperature°',
+                            '$temperature°c',
                             style: kTempTextStyle,
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 30,
-                      ),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
                       Expanded(
-                        child: Text(
-                          weatherIcon,
-                          style: kConditionTextStyle,
-                        ),
+                        child: Image.network(
+                            'https://openweathermap.org/img/wn/$icon@4x.png'),
+                        // child: Text(weatherIcon,style: kConditionTextStyle,),
                       ),
                     ],
                   ),
@@ -141,11 +147,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       Expanded(
                         child: Column(
                           children: [
+                            Text('Feels Like', style: kDetailsStyle),
                             Text(
-                                'Feels Like',
-                                style: kDetailsStyle),
-                            Text(
-                              '$feels_like°',
+                              '$feels_like °C',
                               style: kDetailsText,
                             ),
                           ],
@@ -166,11 +170,40 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ),
               ),
-              Text(
-                '$message in $cityName',
-                textAlign: TextAlign.center,
-                style: kMessageTextStyle,
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text('Wind speed', style: kDetailsStyle),
+                        Text(
+                          '$wind_speed m/s',
+                          style: kDetailsText,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text('Max temperature', style: kDetailsStyle),
+                        Text(
+                          '$max_temp °C',
+                          style: kDetailsText,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(
+                height: 30,
+              )
+              // Text(
+              //   '$message in $cityName',
+              //   textAlign: TextAlign.center,
+              //   style: kMessageTextStyle,
+              // ),
             ],
           ),
         ),

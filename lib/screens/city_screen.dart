@@ -41,8 +41,7 @@ class _CityScreenState extends State<CityScreen> {
                 child: TextField(
                   style: TextStyle(
                     color: Colors.black,
-                    fontFamily: 'Spartan MB',
-                    fontWeight: FontWeight.w100,
+                    fontWeight: FontWeight.w300,
                   ),
                   decoration: kTextFieldInputDecoration,
                   onChanged: (value){
