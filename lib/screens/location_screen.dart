@@ -24,6 +24,10 @@ class _LocationScreenState extends State<LocationScreen> {
   double wind_speed;
   int max_temp;
 
+  var dt = DateTime.now();
+  String img;
+
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +56,11 @@ class _LocationScreenState extends State<LocationScreen> {
       wind_speed = weatherData['wind']['speed'];
       double m_temp = weatherData['main']['temp_max'];
       max_temp = m_temp.toInt();
+      if(dt.hour >= 6 && dt.hour <= 18){
+        img = 'bg';
+      }else{
+        img = 'bg_night';
+      }
     });
   }
 
@@ -61,7 +70,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/bg.png'),
+            image: AssetImage('images/$img.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.6), BlendMode.dstATop),
