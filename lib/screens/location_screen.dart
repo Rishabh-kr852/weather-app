@@ -142,9 +142,6 @@ class _LocationScreenState extends State<LocationScreen> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
                       Expanded(
                         child: Image.network(
                             'https://openweathermap.org/img/wn/$icon@4x.png'),

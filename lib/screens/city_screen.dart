@@ -8,13 +8,28 @@ class CityScreen extends StatefulWidget {
 
 class _CityScreenState extends State<CityScreen> {
   String cityName;
+  String img;
+  var dt = DateTime.now();
+  void updateBg(){
+    if(dt.hour >= 6 && dt.hour <= 18){
+      img = 'bg';
+    }else{
+      img = 'bg_night';
+    }
+  }
+
+  @override
+  void initState() {
+    updateBg();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('images/bg.png'),
+            image: AssetImage('images/$img.png'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Colors.white.withOpacity(0.6), BlendMode.dstATop),
@@ -44,6 +59,7 @@ class _CityScreenState extends State<CityScreen> {
                     fontWeight: FontWeight.w300,
                   ),
                   decoration: kTextFieldInputDecoration,
+
                   onChanged: (value){
                     cityName = value;
                   },
